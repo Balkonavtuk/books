@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/register")
 public class RegistrationController {
 
-    private final UserRepository staffRepository;
+    private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public RegistrationController(UserRepository staffRepository,
+    public RegistrationController(UserRepository userRepository,
                                   RoleRepository roleRepository,
                                   PasswordEncoder passwordEncoder) {
-        this.staffRepository = staffRepository;
+        this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -39,7 +39,7 @@ public class RegistrationController {
     })
     @PostMapping
     public ResponseEntity<String> register(@RequestBody RegistrationRequest request) {
-        if (staffRepository.findByUsername(request.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("User already exists");
         }
         Role userRole = roleRepository.findByRoleName("ADMIN")
@@ -54,7 +54,7 @@ public class RegistrationController {
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(userRole);
-        staffRepository.save(user);
+        userRepository.save(user);
         return ResponseEntity.ok("User registered successfully");
     }
 }

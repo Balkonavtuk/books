@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final UserServiceImpl staffService;
+    private final UserServiceImpl userService;
     private final JwtTokenProvider jwtTokenProvider;
 
     public AuthController(AuthenticationManager authenticationManager,
-                          UserServiceImpl staffService,
+                          UserServiceImpl userService,
                           JwtTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
-        this.staffService = staffService;
+        this.userService = userService;
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
