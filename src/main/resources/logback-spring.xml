@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Подключаем дефолтные настройки Spring Boot -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- Аппендер для консоли -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Логи Hibernate SQL, если нужно -->
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+
+    <!-- Логи Springdoc -->
+    <logger name="org.springdoc" level="DEBUG"/>
+
+    <!-- Логи всего вашего приложения -->
+    <logger name="com.example.book_catalog" level="DEBUG"/>
+
+    <!-- Корневой логгер печатает в консоль -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
+

@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/book_catalog
+    username: postgres
+    password: 5702
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,loggers
+
+logging:
+  console:
+    enabled: true    # включаем аппендер в консоль
+
+  level:
+    root: INFO
+    com.example.book_catalog: DEBUG
+    org.springdoc: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+  app:
+      jwtSecret: Loremipsumdolorsitametconsecteturadipiscingelitquisquefaucibusexsapienvitaepellentesquesemplaceratinidcursusmipretiumtellusduisconvallistempusleoeuaenean
+      jwtExpirationMs: 86400000
+
+  spring:
+      liquibase: change-log=classpath:/db/changelog/db.changelog-master.yaml
+      jpa:
+          hibernate:
+              ddl-auto: validate
